@@ -2,6 +2,34 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import Register from '../views/Register.vue'
 import Login from '../views/Login.vue'
+import Users from '../views/Users.vue'
+import axios from 'axios'
+
+function AdminAuth(to, from, next) {
+
+  if(localStorage.getItem('token') != undefined) {
+
+    let req = {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem('token')
+      }
+    }
+
+    console.log(req)
+
+    axios.post("http://localhost:8080/validate", {}, req).then(res => {
+    console.log(res);
+    next();
+    }).catch(err => {
+      console.log(err.response);
+      console.log(err);
+      next("/login")
+    })
+  }else {
+    next("/login")
+  }
+   
+}
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -18,6 +46,12 @@ const router = createRouter({
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import('../views/AboutView.vue')
+    },
+    {
+      path: '/admin/users',
+      name: 'users',
+      component: Users,
+      beforeEnter: AdminAuth
     },
     {
       path: '/register',

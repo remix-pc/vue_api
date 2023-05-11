@@ -22,4 +22,6 @@ router.post("/changepassword", UserController.changePassword)
 
 router.post("/login", UserController.login)
 
+router.post("/validate", AdminAuth, HomeController.validate)
+
 module.exports = router;

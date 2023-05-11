@@ -4,6 +4,11 @@ class HomeController{
        return res.send("Olá Mundo!");
     }
 
+    async validate(req, res){
+        res.send("Ok!")
+    }
+
 }
+
 
 module.exports = new HomeController();
