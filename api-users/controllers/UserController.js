@@ -68,11 +68,11 @@ class UserController{
                 res.send("Ok!")
             } else {
                 res.status(406)
-                res.send(result.erro)
+                res.json({err: 'Error'})
             }
         } else {
             res.status(406)
-            res.send("Ocorreu um erro no servidor!")
+            res.json({err: 'Error'})
         }
 
     }

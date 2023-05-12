@@ -4,6 +4,7 @@ import Register from '../views/Register.vue'
 import Login from '../views/Login.vue'
 import Users from '../views/Users.vue'
 import axios from 'axios'
+import Edit from '../views/Edit.vue'
 
 function AdminAuth(to, from, next) {
 
@@ -62,6 +63,12 @@ const router = createRouter({
       path: '/login',
       name: "Login",
       component: Login
+    },
+    {
+      path: '/admin/users/edit/:id',
+      name: 'Edit',
+      component: Edit,
+      beforeEnter: AdminAuth,
     }
   ]
 })
